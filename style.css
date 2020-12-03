@@ -1,5 +1,18 @@
-body{
-    background-color: #def9ff;
+
+.day {
+    background: url("img/backgroundday.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.night{
+    background: url("img/backgroundnight.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .top_aligner {

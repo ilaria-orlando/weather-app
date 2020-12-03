@@ -9,6 +9,7 @@
     let fiveDaysTemp = document.getElementById("5daysTemp");
     let fiveDaysWeather = document.getElementById("5daysWeather");
     let weekdayHTML = document.getElementById("weekday");
+    let root = document.getElementsByTagName( 'html' )[0];
     let longitude;
     let latitude;
     let currentTemp;
@@ -21,7 +22,20 @@
     let day = d.getDay();
     let weekday = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"]
     let weekdayTable = [];
+    let hourDay = d.getHours();
 
+    //set background day and night by adding a class to the HTML tag
+    backgroundChange = () =>{
+        if(hourDay < 6 || hourDay > 18){
+            root.setAttribute("class", "night");
+        }
+        else{
+            root.setAttribute("class", "day");
+        }
+
+    }
+
+    backgroundChange();
 
 
     //hide image until city and forecast is loaded
