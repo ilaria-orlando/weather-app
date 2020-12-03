@@ -1,0 +1,45 @@
+body{
+    background-color: #def9ff;
+}
+
+.top_aligner {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 30px;
+    margin: 0;
+    height: 150px;
+}
+
+.card{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.weatherApp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 600px;
+    background-color: white;
+
+}
+
+.currentweather{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-top: 40px;
+    margin-top: 0;
+}
+
+
+
+.bottom_aligner {
+    display: inline-block;
+    height: 100%;
+    vertical-align: bottom;
+}

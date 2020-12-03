@@ -6,21 +6,33 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <div class="weatherApp">
-            <form method="POST">
-                <label for="city">Please fil in your city</label>
-                <input type="text" id="city" name="city">
-                <button type="button" id="run">Test</button>
-            </form>
-            <div class="currentweather">
-                <p id="temp"></p>
-                <p id="weather"></p>
-                <p id="wind"></p>
-                <img src="#" alt="weather" height="200px" width="200px" id="img">
+        <div class="card">
+            <div class="weatherApp">
+                <div class="top_aligner">
+                    <form method="POST">
+                        <label for="city">Please fil in your city</label><br>
+                        <input type="text" id="city" name="city"><br>
+                        <button type="button" id="run">Test</button>
+                    </form>
+                    <p id="error"></p>
+                </div>
+                <div class="currentweather">
+                    <div class="weathervalues">
+                        <p>Current temperature: <span id="temp"></span></p>
+                        <p><span id="weather"></span></p>
+                        <p>Wind: <span id="wind"></span></p>
+                    </div>
+                    <img src="#" alt="weather" height="200px" width="200px" id="img">
+                </div>
+                <div class="bottom_aligner">
+                    <table class="fivedayforecast">
+                        <tr id = "weekday"></tr>
+                        <tr id="5daysTemp"></tr>
+                        <tr id="5daysWeather"></tr>
+                    </table>
+                </div>
             </div>
-            <ul id="5days"></ul>
         </div>
-
 
 
         <script src="./script.js"></script>
