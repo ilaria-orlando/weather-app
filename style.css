@@ -79,7 +79,7 @@ form{
 
 
 
-.weatherApp {
+#weatherApp {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -96,6 +96,7 @@ form{
 
 .weathervalues{
     display: flex;
+    margin-top: -20px;
 }
 
 .currentweather{
@@ -107,6 +108,11 @@ form{
     margin-top: 0;
 }
 
+.chartcontainer{
+    width: 255px;
+    height: 100px;
+    margin-bottom: 20px;
+}
 
 
 .bottom_aligner {
@@ -147,4 +153,5 @@ td{
 .nightcolors{
     background-color: rgba(97, 75, 157, 0.60);
 }
+
 

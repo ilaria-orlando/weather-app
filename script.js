@@ -13,6 +13,7 @@
     let body = document.body;
     let themeButton = document.getElementById("theme");
     let table = document.getElementById("table");
+    let chart = document.getElementById("chart").getContext("2d");
     let longitude;
     let latitude;
     let currentTemp;
@@ -21,36 +22,45 @@
     let icon;
     let forecastTemp = [];
     let forecastWeather = [];
+    let chartArray = [];
     let d = new Date();
     let day;
     let weekday = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"]
     let weekdayTable = [];
+    let weekdayChart = [];
     let hourDay = d.getHours();
 
-    //set background day and night by adding a class to the HTML tag
+    //hide image and table until city and forecast is loaded
+    img.style.visibility = "hidden";
+    table.style.visibility = "hidden";
+
+
+    //function grouping the dark theme classes
+    darkTheme = () => {
+        root.classList.toggle("night");
+        body.classList.toggle("bodynight");
+        table.classList.toggle("nightcolors");
+        cityForm.classList.toggle("nightcolors");
+    }
+
+    //automatic day and night them switch according to hours of the day
    backgroundChangeAuto = () =>{
         if(hourDay < 6 || hourDay > 18){
-            root.classList.toggle("night");
-            body.classList.toggle("bodynight");
-            table.classList.toggle("nightcolors");
-            cityForm.classList.toggle("nightcolors");
+            darkTheme();
         }
 
     }
 
     backgroundChangeAuto();
 
+
+   // set toggle button to switch between dark and light theme by users choice.
    themeButton.addEventListener("click", function () {
-       root.classList.toggle("night");
-       body.classList.toggle("bodynight");
-       table.classList.toggle("nightcolors");
-       cityForm.classList.toggle("nightcolors");
+       darkTheme();
    });
 
 
-    //hide image and table until city and forecast is loaded
-    img.style.visibility = "hidden";
-    table.style.visibility = "hidden";
+
 
     //first call api of 5 day weather forecast, use the lat and lon data to call 7 day, daily forecasts
     button.addEventListener ("click", function () {
@@ -70,6 +80,8 @@
                         forecastTemp.length = 0;
                         forecastWeather.length = 0;
                         weekdayTable.length = 0;
+                        chartArray.length = 0;
+                        weekdayChart.length = 0;
                         //define day of the week each time button is clicked so it will not just keep adding it up
                         day = d.getDay();
                         fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=metric&exclude=hourly,minutely&appid=6d62f680b47ba0a60f39206b9e1a714a")
@@ -88,13 +100,16 @@
                                             let temperature = Math.round(data2.daily[i].temp.day);
                                             let weather5days = data2.daily[i].weather[0].main;
                                             let spanTemp = "<td>" + temperature + "°c" + "</td>"
+                                            let chartTemp = temperature;
                                             let spanWeather = "<td>" + weather5days + "</td>"
                                             forecastTemp.push(spanTemp);
                                             forecastWeather.push(spanWeather);
+                                            chartArray.push(chartTemp);
                                         }
 
                                         currentWeather();
                                         forecastFivedays();
+                                        lineChart();
                                         console.log(day);
                                         console.log(weekdayTable);
 
@@ -105,6 +120,49 @@
                 }
             )
     });
+
+    //line chart drawn with the tamperature values of the next 5 days
+    lineChart = () =>{
+        let myChart = new Chart(chart, {
+            type: "line",
+            data: {
+                labels: weekdayChart,
+                datasets: [{
+                    label: "Temp",
+                    data: chartArray,
+                    fill: false,
+                    borderColor: 'rgb(108, 82, 161)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false,
+
+                        }
+                    }]
+                }
+            },
+        });
+    }
+
+
 
 
     //add the data of the current weather to the html
@@ -121,17 +179,22 @@
     forecastFivedays = () => {
         //push days of the week to array
         let spanWeekday;
+        let daysForchart
         for(i = 0; i < 5; i++){
             // reset week if day is on day 6
             if(day === 6){
                 day = 0;
                 spanWeekday = "<td>" + weekday[0] + "</td>"
+                daysForchart = weekday[0];
                 weekdayTable.push(spanWeekday);
+                weekdayChart.push(daysForchart);
             }
             else{
                 day = day +1;
                 spanWeekday = "<td>" + weekday[day] + "</td>"
+                daysForchart = weekday[day];
                 weekdayTable.push(spanWeekday);
+                weekdayChart.push(daysForchart);
             }
         }
 

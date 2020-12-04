@@ -8,7 +8,7 @@
     <body>
         <button type="button" id="theme">Change Theme</button>
         <div class="card">
-            <div class="weatherApp">
+            <div id="weatherApp">
                 <div class="top_aligner">
                     <form method="POST">
                         <label for="city">Please specify your city</label><br>
@@ -26,8 +26,11 @@
                             <span id="wind"></span>
                         </div>
                     </div>
-
                 </div>
+                <div class="chartcontainer">
+                    <canvas id="chart" width="310px" height="150px"></canvas>
+                </div>
+
                 <div class="bottom_aligner">
                     <table id="table">
                         <tr id = "weekday"></tr>
@@ -38,7 +41,7 @@
             </div>
         </div>
 
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
         <script src="./script.js"></script>
     </body>
 </html>
