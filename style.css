@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow&display=swap');
 
-.day {
+html {
     background: url("img/backgroundday.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -7,12 +8,39 @@
     background-size: cover;
 }
 
-.night{
-    background: url("img/backgroundnight.png") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+body{
+    color: #b05c84;
+}
+
+
+input{
+    border-style: none;
+    border-radius: 10px;
+    margin: 0px 10px 0px 0px;
+    height: 30px;
+    text-align: center;
+    background-color: rgba(250, 200, 196, 0.60);
+    font-family: 'Archivo Narrow', sans-serif;
+    -webkit-box-shadow: 7px 13px 24px -19px, -10px -6px 24px -19px rgba(0,0,0,0.5);
+    -moz-box-shadow: 7px 13px 24px -19px, -10px -6px 24px -19px rgba(0,0,0,0.5);
+    box-shadow: 7px 13px 24px -19px, -10px -6px 24px -19px rgba(0,0,0, 0.5);
+}
+
+#run{
+    font-family: 'Archivo Narrow', sans-serif;
+    text-align: center;
+    border-style: none;
+    border-radius: 10px;
+    font-size: 14px;
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+    margin: 10px;
+}
+
+body{
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 18px;
 }
 
 .top_aligner {
@@ -20,7 +48,11 @@
     vertical-align: top;
     padding-top: 30px;
     margin: 0;
-    height: 150px;
+    height: 130px;
+}
+
+form{
+    text-align: center;
 }
 
 .card{
@@ -29,6 +61,24 @@
     margin-top: 20px;
 }
 
+#temp{
+    font-size: 50px;
+    font-weight: bold;
+    height: 80px;
+}
+
+#img{
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.flex{
+    height: 80px;
+    padding: 10px 0px 0px 20px;
+}
+
+
+
 .weatherApp {
     display: flex;
     flex-direction: column;
@@ -36,8 +86,16 @@
     align-items: center;
     width: 400px;
     height: 600px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.50);
+    border-radius: 30px;
+    -webkit-box-shadow: 7px 13px 24px -19px, -10px -6px 24px -19px rgba(0,0,0,0.5);
+    -moz-box-shadow: 7px 13px 24px -19px, -10px -6px 24px -19px rgba(0,0,0,0.5);
+    box-shadow: 7px 13px 24px -19px, -10px -6px 24px -19px rgba(0,0,0, 0.5);
 
+}
+
+.weathervalues{
+    display: flex;
 }
 
 .currentweather{
@@ -45,7 +103,7 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    padding-top: 40px;
+    padding-top: 10px;
     margin-top: 0;
 }
 
@@ -56,3 +114,37 @@
     height: 100%;
     vertical-align: bottom;
 }
+
+table{
+    margin-top: 25px;
+    padding: 10px 20px 10px 20px;
+    background-color: rgba(250, 200, 196, 0.60);
+    border-radius: 10px;
+    -webkit-box-shadow: 7px 13px 24px -19px, -10px -6px 24px -19px rgba(0,0,0,0.5);
+    -moz-box-shadow: 7px 13px 24px -19px, -10px -6px 24px -19px rgba(0,0,0,0.5);
+    box-shadow: 7px 13px 24px -19px, -10px -6px 24px -19px rgba(0,0,0, 0.5);
+    clear: both;
+}
+
+td{
+    text-align: center;
+    padding: 3px 10px 0px 10px;
+    font-size: 14px;
+}
+
+.night{
+    background: url("img/backgroundnight.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.bodynight{
+    color: #1a1351;
+}
+
+.nightcolors{
+    background-color: rgba(97, 75, 157, 0.60);
+}
+

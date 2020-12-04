@@ -6,26 +6,30 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
+        <button type="button" id="theme">Change Theme</button>
         <div class="card">
             <div class="weatherApp">
                 <div class="top_aligner">
                     <form method="POST">
-                        <label for="city">Please fil in your city</label><br>
-                        <input type="text" id="city" name="city"><br>
-                        <button type="button" id="run">Test</button>
+                        <label for="city">Please specify your city</label><br>
+                        <input type="text" id="city" name="city">
+                        <button type="button" id="run">Go!</button>
                     </form>
                     <p id="error"></p>
                 </div>
                 <div class="currentweather">
+                    <img src="#" alt="weather" height="100px" width="100px" id="img">
                     <div class="weathervalues">
-                        <p>Current temperature: <span id="temp"></span></p>
-                        <p><span id="weather"></span></p>
-                        <p>Wind: <span id="wind"></span></p>
+                        <span id="temp"></span>
+                        <div class="flex">
+                            <span id="weather"></span><br>
+                            <span id="wind"></span>
+                        </div>
                     </div>
-                    <img src="#" alt="weather" height="200px" width="200px" id="img">
+
                 </div>
                 <div class="bottom_aligner">
-                    <table class="fivedayforecast">
+                    <table id="table">
                         <tr id = "weekday"></tr>
                         <tr id="5daysTemp"></tr>
                         <tr id="5daysWeather"></tr>
