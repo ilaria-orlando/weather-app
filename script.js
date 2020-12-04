@@ -113,7 +113,7 @@
     //first call api of 5 day weather forecast, use the lat and lon data to call 7 day, daily forecasts
     button.addEventListener ("click", function () {
         let city = cityForm.value;
-        fetch("http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=6d62f680b47ba0a60f39206b9e1a714a")
+        fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=6d62f680b47ba0a60f39206b9e1a714a")
             .then(
                 function(response1) {
                     if(response1.status !== 200){

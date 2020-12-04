@@ -55,6 +55,10 @@ input{
     margin: 10px;
 }
 
+#error{
+    text-align: center;
+}
+
 body{
     font-family: 'Archivo Narrow', sans-serif;
     font-size: 18px;
