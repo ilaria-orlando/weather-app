@@ -59,7 +59,55 @@
        darkTheme();
    });
 
+    getLocation = ( ) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                longitude = position.coords.longitude;
+                latitude = position.coords.latitude;
+                day = d.getDay();
+                longLatApi();
+            });
+        }
+        else {
+            console.log(`Geolocation is not supported by this browser.`);
+        }
+    }
+    getLocation();
 
+    longLatApi = () => {
+        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=metric&exclude=hourly,minutely&appid=6d62f680b47ba0a60f39206b9e1a714a")
+            .then(
+                function(response2){
+                    response2.json().then(function(data2){
+                        //get data for current moment for the city that's entered
+                        console.log(data2);
+                        currentTemp = data2.current.temp;
+                        weather = data2.daily[0].weather[0].description;
+                        wind = data2.current.wind_speed;
+                        icon = data2.current.weather[0].icon;
+
+                        //get info for the next 5 days and push them to an array
+                        for(i = 1; i < 6; i ++){
+                            let temperature = Math.round(data2.daily[i].temp.day);
+                            let weather5days = data2.daily[i].weather[0].main;
+                            let spanTemp = "<td>" + temperature + "°c" + "</td>"
+                            let chartTemp = temperature;
+                            let spanWeather = "<td>" + weather5days + "</td>"
+                            forecastTemp.push(spanTemp);
+                            forecastWeather.push(spanWeather);
+                            chartArray.push(chartTemp);
+                        }
+
+                        currentWeather();
+                        forecastFivedays();
+                        lineChart();
+                        console.log(day);
+                        console.log(weekdayTable);
+
+                    });
+                }
+            )
+    }
 
 
     //first call api of 5 day weather forecast, use the lat and lon data to call 7 day, daily forecasts
@@ -84,38 +132,7 @@
                         weekdayChart.length = 0;
                         //define day of the week each time button is clicked so it will not just keep adding it up
                         day = d.getDay();
-                        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=metric&exclude=hourly,minutely&appid=6d62f680b47ba0a60f39206b9e1a714a")
-                            .then(
-                                function(response2){
-                                    response2.json().then(function(data2){
-                                        //get data for current moment for the city that's entered
-                                        console.log(data2);
-                                        currentTemp = data2.current.temp;
-                                        weather = data2.daily[0].weather[0].description;
-                                        wind = data2.current.wind_speed;
-                                        icon = data2.current.weather[0].icon;
-
-                                        //get info for the next 5 days and push them to an array
-                                        for(i = 1; i < 6; i ++){
-                                            let temperature = Math.round(data2.daily[i].temp.day);
-                                            let weather5days = data2.daily[i].weather[0].main;
-                                            let spanTemp = "<td>" + temperature + "°c" + "</td>"
-                                            let chartTemp = temperature;
-                                            let spanWeather = "<td>" + weather5days + "</td>"
-                                            forecastTemp.push(spanTemp);
-                                            forecastWeather.push(spanWeather);
-                                            chartArray.push(chartTemp);
-                                        }
-
-                                        currentWeather();
-                                        forecastFivedays();
-                                        lineChart();
-                                        console.log(day);
-                                        console.log(weekdayTable);
-
-                                    });
-                                }
-                            )
+                        longLatApi();
                     });
                 }
             )
