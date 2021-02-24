@@ -18,6 +18,7 @@
     let themeButton = document.getElementById("theme");
     let table = document.getElementById("table");
     let chart = document.getElementById("chart").getContext("2d");
+    let apikey = "6d62f680b47ba0a60f39206b9e1a714a";
     let longitude;
     let latitude;
     let currentTemp;
@@ -78,40 +79,11 @@
     }
     getLocation();
 
-    //first call api of 5 day weather forecast, use the lat and lon data to call 7 day, daily forecasts
-    button.addEventListener ("click", function () {
-        let city = cityForm.value;
-        fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=6d62f680b47ba0a60f39206b9e1a714a")
-            .then(
-                function(response1) {
-                    if(response1.status !== 200){
-                        error = "I don't know this city :( <br> Try again please";
-                    }else{
-                        error = "";
-                    }
-                    response1.json().then(function(data1) {
-                        latitude = data1.city.coord.lat;
-                        longitude = data1.city.coord.lon;
-                        //clear the arrays with 5 day forecast information so it's reset when a new city is entered
-                        forecastTemp.length = 0;
-                        forecastWeather.length = 0;
-                        weekdayTable.length = 0;
-                        chartArray.length = 0;
-                        weekdayChart.length = 0;
-                        //define day of the week each time button is clicked so it will not just keep adding it up
-                        day = d.getDay();
-                        longLatApi();
-                    });
-                }
-            )
-            .catch(function(err){
-                console.log("Fetch error", err);
-            });
-    });
 
-    //use long and latitude to get info from the 5 day forecast api
+
+
     longLatApi = () => {
-        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=metric&exclude=hourly,minutely&appid=6d62f680b47ba0a60f39206b9e1a714a")
+        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=metric&exclude=hourly,minutely&appid=" + apikey)
             .then(
                 function(response2){
                     response2.json().then(function(data2){
@@ -149,7 +121,36 @@
     }
 
 
-
+    //first call api of 5 day weather forecast, use the lat and lon data to call 7 day, daily forecasts
+    button.addEventListener ("click", function () {
+        let city = cityForm.value;
+        fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + apikey)
+            .then(
+                function(response1) {
+                    if(response1.status !== 200){
+                        error = "I don't know this city :( <br> Try again please";
+                    }else{
+                        error = "";
+                    }
+                    response1.json().then(function(data1) {
+                        latitude = data1.city.coord.lat;
+                        longitude = data1.city.coord.lon;
+                        //clear the arrays with 5 day forecast information so it's reset when a new city is entered
+                        forecastTemp.length = 0;
+                        forecastWeather.length = 0;
+                        weekdayTable.length = 0;
+                        chartArray.length = 0;
+                        weekdayChart.length = 0;
+                        //define day of the week each time button is clicked so it will not just keep adding it up
+                        day = d.getDay();
+                        longLatApi();
+                    });
+                }
+            )
+            .catch(function(err){
+                console.log("Fetch error", err);
+            });
+    });
 
     //line chart drawn with the tamperature values of the next 5 days
     lineChart = () =>{
